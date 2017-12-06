@@ -12,6 +12,10 @@ import datetime
 
 from django.core.wsgi import get_wsgi_application
 from django.http import HttpResponse,Http404
+from django.template.loader import get_template
+from django.shortcuts import render_to_response
+from django.template import Context
+
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "untitled.settings")
 
@@ -21,9 +25,8 @@ def hello(request):
     return HttpResponse("Hello World")
 
 def current_datatime(request):
-    now = datetime.datetime.now()
-    html = "<html><body>It is now %s.</body></html>" %now
-    return HttpResponse(html)
+    now=datetime.datetime.now()
+    return render_to_response('current_datetime.html',{'current_date':now})
 
 def hours_ahead(request,offest):
     try:
